@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates xml:space="preserve">
+    <t t-name="RupeeWidget">
+        <span t-att-class="'oe_form_field '+widget.widget_class"
+              t-att-style="widget.attrs.style">
+            <div/>
+            <input
+                    type="text"
+                    class="o_input"
+                    t-att-id="widget.id_for_label"
+                    t-att-tabindex="widget.attrs.tabindex"
+                    t-att-autofocus="widget.attrs.autofocus"
+                    t-att-placeholder="widget.attrs.placeholder"
+                    t-att-maxlength="widget.field.size"
+                    t-if="widget.mode !== 'readonly'"
+            />
+            <t t-else="">
+            <span class="oe_field_rupee_float"/>
+            </t>
+        </span>
+    </t>
+
+    <t t-name="RupeeWidgetInteger">
+        <span t-att-class="'oe_form_field '+widget.widget_class"
+              t-att-style="widget.attrs.style">
+        <div/>
+            <input
+                    type="text"
+                    class="o_input"
+                    t-att-id="widget.id_for_label"
+                    t-att-tabindex="widget.attrs.tabindex"
+                    t-att-autofocus="widget.attrs.autofocus"
+                    t-att-placeholder="widget.attrs.placeholder"
+                    t-att-maxlength="widget.field.size"
+                    t-if="widget.mode !== 'readonly'"
+            />
+            <t t-else="">
+            <span class="oe_field_rupee_integer"/>
+            </t>
+        </span>
+    </t>
+
+</templates>

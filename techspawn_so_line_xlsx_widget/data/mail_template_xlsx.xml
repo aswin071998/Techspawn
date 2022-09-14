@@ -1,0 +1,57 @@
+<odoo>
+    <data>
+        <!--Email template -->
+        <record id="email_sale_order_xlsx" model="mail.template">
+            <field name="name">Email Template</field>
+            <field name="model_id" ref="techspawn_so_line_xlsx_widget.model_sale_order"/>
+            <field name="email_from">${object.company_id.email |safe}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="subject">Ref ${object.name or 'n/a' }</field>
+            <field name="auto_delete" eval="True"/>
+<!--            <field name="report_template" ref="techspawn_so_line_xlsx_widget.partner_xlsx"/>-->
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="body_html"><![CDATA[
+                <p>Hi</p>
+                <br/>
+                <p>Your Sale Order ${object.name} amounting in ${object.currency_id.symbol}${object.amount_total} is ready for review.</p>
+                <br/>
+                <br/>
+                <p>Do not hesitate to contact us if you have any questions.</p>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+
+                <p>Regards,</p>
+                <p>${object.env.user.name}</p>
+
+                 ]]>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<odoo>-->
+<!--    <record id="email_sale_order_xlsx" model="mail.template">-->
+<!--        <field name="name">email sale order xlsx</field>-->
+<!--        <field name="model_id" ref="techspawn_so_line_xlsx_widget.model_sale_order"/>-->
+<!--        <field name="auto_delete" eval="True"/>-->
+<!--        <field name="email_from">${object.company_id.email |safe}</field>-->
+<!--        <field name="email_to">{{object.partner_id.email}}</field>-->
+<!--        <field name="report_template" ref="techspawn_so_line_xlsx_widget.partner_xlsx"/>-->
+<!--&lt;!&ndash;        <field name="subject">{{object.amc}}</field>&ndash;&gt;-->
+<!--        <field name="body_html">-->
+<!--            <p>-->
+<!--                Dear<t t-out="object.client_name.name"/>,-->
+<!--                <br/>-->
+<!--                <br/>-->
+<!--                This email includes Xlsx report-->
+<!--                <br/>-->
+<!--            </p>-->
+<!--            Regards,-->
+<!--            <br/>-->
+<!--            <t t-out="object.company_id.name"/>-->
+<!--        </field>-->
+<!--    </record>-->
+<!--</odoo>-->

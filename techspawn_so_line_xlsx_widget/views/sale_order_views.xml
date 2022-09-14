@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sale_order_excel_report_button_view_form" model="ir.ui.view">
+        <field name="name">sale.order.excel.report.button.form.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="send_excel_report_by_email" type="object" string="Send Excel Report By Email"
+                        class="btn-primary"/>
+            </xpath>
+            <xpath expr="//field[@name='sale_order_template_id']" position="after">
+                <field name="xl_report" invisible="1"/>
+                <field name="xl_report_name" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_order_line_product_template_view_form" model="ir.ui.view">
+        <field name="name">sale.order.line.product.template</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']//tree//field[@name='product_id']" position="after">
+                <field name="product_tmpl_id" groups="techspawn_so_line_xlsx_widget.group_product_template_so_line"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_order_line_product_product_invisible_view_form" model="ir.ui.view">
+        <field name="name">sale.order.line.product.product.invisible.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="groups_id"
+               eval="[(6, 0, [ref('techspawn_so_line_xlsx_widget.group_product_template_so_line') ])]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']//tree//field[@name='product_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sale_order_demo_fields_form_view">
+        <field name="name">sale.order.demo.fields.form.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="example_float_widget" widget="rupee_float"/>
+                <field name="example_integer_widget" widget="rupee_integer"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sale_order_demo_fields_tree_view">
+        <field name="name">sale.order.demo.fields.tree.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount_total']" position="before">
+                <field name="example_integer_widget" widget="rupee_integer"/>
+                <field name="example_float_widget" widget="rupee_float"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--    <record id="sale_order_total_rupee_widget" model="ir.ui.view">-->
+    <!--        <field name="name">sale.order.total.rupee.widget</field>-->
+    <!--        <field name="model">sale.order</field>-->
+    <!--        <field name="inherit_id" ref="sale.view_order_form"/>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <xpath expr="//field[@name='amount_total']" position="attributes">-->
+    <!--                <attribute name="widget">rupee_widget</attribute>-->
+    <!--            </xpath>-->
+    <!--        </field>-->
+    <!--    </record>-->
+</odoo>
